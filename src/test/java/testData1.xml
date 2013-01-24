@@ -1,0 +1,32 @@
+<Policy>
+	<CommonPolicy>
+		<policyNo>111</policyNo>
+	</CommonPolicy>
+	<QuotoInfo>
+		<QuotNo>222</QuotNo>
+	</QuotoInfo>
+
+	<location>
+		<locationId>1223</locationId>
+	</location>
+	<location>
+		<locationId>444</locationId>
+	</location>
+	<location>
+		<locationId>3333</locationId>
+	</location>
+	<classifiction idRef="333">
+		<coverage>
+			<coverageCd>ABC</coverageCd>
+			<premium>
+				1110.000
+			</premium>
+		</coverage>
+		<coverage>
+			<coverageCd>RR</coverageCd>
+			<premium>
+				1110.000
+			</premium>
+		</coverage>
+	</classifiction>
+</Policy>

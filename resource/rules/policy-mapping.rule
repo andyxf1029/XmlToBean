@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+	<ruleSet id="commonPolicy" path="Policy/CommonPolicy" createBean="com.ebao.as.integration.acord.bean.PolicySOABO" >
+		<rule>
+			<acord-path>policyNo</acord-path>
+			<bean-path>policyNo</bean-path>
+			<tools><!-- tools name in spring -->
+			</tools>
+			<special-rule><!-- spring bean, clojure.method ,class .method -->
+			</special-rule>
+		</rule>
+	</ruleSet>
+	
+	<ruleSet id="commonPolicy2" path="Policy/CommonPolicy" createBean="com.ebao.as.integration.acord.bean.PolicySOABO">
+		<rule>
+			<acord-path>policyId</acord-path>
+			<bean-path>policyID</bean-path>
+			<tools><!-- tools name in spring -->
+			</tools>
+			<special-rule><!-- spring bean, clojure.method ,class .method -->
+			</special-rule>
+		</rule>
+	</ruleSet>
+
+
+	<ruleSet id="loaction" path ="Policy/location" createBean="com.ebao.as.integration.acord.bean.LocationSOABO" >
+		<rule>
+			<acord-path>locationId</acord-path>
+			<bean-path>locationId</bean-path>
+		</rule>
+	</ruleSet>
+
+
+	<ruleSet id="Classification" path="Policy/classifiction"
+		createBean="com.ebao.as.integration.acord.bean.ClassificationSOABO">
+		<rule path="coverage" ref="coverage" after="setPolicyCtList" />
+	</ruleSet>
+
+	<ruleSet id="coverage" createBean="com.ebao.as.integration.acord.bean.PolicyCtSOABO">
+		<rule>
+			<acord-path>premium</acord-path>
+			<bean-path>premium</bean-path>
+			<!-- class:com.ebao.gs.integration.mapping.tools.impl.CodeTableUtils?method=format -->
+			<tools>bean:codeTable?method=convert@codetable=T_AS@perCondition=id=5
+			</tools>
+		</rule>
+	</ruleSet>
+
+
+
+
+</rules>
+
+

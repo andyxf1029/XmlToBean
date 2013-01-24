@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+	<ruleSet id="commonPolicy" createBean="PolicySOABO">
+		<rule>
+			<acord-path>polocNo/</acord-path>
+			<bean-path>policyNo</bean-path>
+			<tools><!-- tools name in spring -->
+			</tools>
+			<special-rule><!-- spring bean, clojure.method ,class .method -->
+			</special-rule>
+		</rule>
+		<rule>
+			<acord-path></acord-path>
+			<bean-path></bean-path>
+			<tools><!-- tools name in spring -->
+			</tools>
+			<special-rule><!-- spring bean, clojure.method ,class.method -->
+			</special-rule>
+		</rule>
+	</ruleSet>
+	
+	
+	<ruleSet id="loaction" createBean="LocationSOABO">
+		<rule>
+			<acord-path></acord-path>
+			<bean-path>quotNo</bean-path>
+			<tools><!-- tools name in spring --> DateTools
+			</tools>
+			<special-rule><!-- spring bean, clojure.method ,class .method -->
+			</special-rule>
+		</rule>
+	</ruleSet>
+	
+
+	<ruleSet id="CT-CGL" createBean="ClassificationSOABO" >
+		<rule>
+			<acord-path>classification/</acord-path>
+			<bean-path>quotNo</bean-path>
+			<tools><!-- tools name in spring --> DateTools
+			</tools>
+			<special-rule><!-- spring bean, clojure.method ,class .method -->
+			</special-rule>
+		</rule>
+		<rule createBean="Policy" key="">
+			<acord-path>lob/classification</acord-path>
+		
+		</rule>
+		
+	</ruleSet>
+	
+	<ruleSet id="benifit" entends="IntresitSOABO">
+	
+		
+		
+	
+		
+	
+	</ruleSet>
+	
+</rules>
+
+

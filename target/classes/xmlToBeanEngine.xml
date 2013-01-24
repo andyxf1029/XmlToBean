@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<aop:aspectj-autoproxy />
+
+
+	<bean id="CacheAspect" class="com.ebao.gs.integration.mapping.aop.CacheAspect">
+		<property name="keyBuilder" ref="keyBuilder" />
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+	
+	
+	<bean id="TimeAspect" class="org.perf4j.javalog.aop.TimingAspect"/> 
+
+	<bean id="keyBuilder"
+		class="com.ebao.gs.integration.mapping.aop.CacheKeyDefaultBuilder"></bean>
+
+	<bean id="cacheManager"
+		class="com.ebao.gs.integration.framework.cache.impl.EhcacheManagerImpl">
+		<property name="basePathProvider" ref="basePathProvider"></property>
+		<property name="configurationName" value="Ehcache-Config.xml"></property>
+		
+		</bean>
+
+	<bean id="XMLToBeanEnigne"
+		class="com.ebao.gs.integration.mapping.impl.XMLToBeanEnigneImpl">
+		<property name="mapperAgent" ref="mapperAgent"></property>
+		<property name="reducerAgent" ref="reducerAgent"></property>
+		<property name="mergeAgent" ref="mergeAgent"></property>
+	</bean>
+	<!-- US mapper : MOVE to project cust xml bean file -->
+	<bean id="mapper" class="com.ebao.as.gs.integration.mapping.mapper.PolicyMapper"></bean>
+	<!-- test tools Util -->
+
+	<bean id="codeTable"
+		class="com.ebao.gs.integration.mapping.tools.impl.CodeTableUtils"></bean>
+
+	<bean id="toolsProvider"
+		class="com.ebao.gs.integration.mapping.helper.impl.ToolsProvider" />
+
+	<bean id="DefaultReducer" class="com.ebao.gs.integration.mapping.reduce.DefaultReducer">
+		<property name="beanSetter" ref="JXpathBeanDataSetter"></property>
+		<property name="dataFetcher" ref="JxpathDataFetcher"></property>
+		<property name="specialRuleProvider" ref="SpecialRuleProvider"></property>
+		<property name="rulePorvider" ref="MappingRuleProvider"></property>
+		<property name="toolsProvider" ref="toolsProvider"></property>
+	</bean>
+
+	<bean id="MappingRuleProvider"
+		class="com.ebao.gs.integration.mapping.configuration.impl.MappingRuleProvider">
+		<property name="multipleFileReader" ref="multipleFileReader"></property>
+		<property name="folderName" value="rules"></property>
+	</bean>
+
+
+	<bean id="multipleFileReader"
+		class="com.ebao.gs.integration.mapping.configuration.impl.MultipleFileReader">
+		<property name="basePathProvider" ref="basePathProvider"></property>
+	</bean>
+
+	<bean id="basePathProvider"
+		class="com.ebao.gs.integration.framework.common.impl.BasePathDefaultProvider" />
+
+
+	<bean id="JXpathBeanDataSetter"
+		class="com.ebao.gs.integration.mapping.helper.impl.JXpathBeanDataSetter"></bean>
+
+	<bean id="JxpathDataFetcher"
+		class="com.ebao.gs.integration.mapping.helper.impl.JxpathDataFetcher"></bean>
+
+	<bean id="SpecialRuleProvider"
+		class="com.ebao.gs.integration.mapping.helper.impl.SpecialRuleProvider"></bean>
+
+
+	<bean id="configurationProvider"
+		class="com.ebao.gs.integration.mapping.configuration.impl.EngineConfigurationProvider"></bean>
+
+	<bean id="beanProvider"
+		class="com.ebao.gs.integration.mapping.helper.impl.BeanProviderImpl"></bean>
+
+	<bean id="reducerCreater"
+		class="com.ebao.gs.integration.mapping.helper.impl.ReducerCreaterImpl">
+		<property name="configurationProvider" ref="configurationProvider"></property>
+		<property name="beanFetcher" ref="beanProvider"></property>
+	</bean>
+
+	<bean id="mapperAgent"
+		class="com.ebao.gs.integration.mapping.mapper.impl.MapperAgentImpl">
+		<property name="configurationProvider" ref="configurationProvider"></property>
+		<property name="beanProvider" ref="beanProvider"></property>
+	</bean>
+	<bean id="mergeAgent"
+		class="com.ebao.gs.integration.mapping.merge.impl.MergeAgentImpl">
+		<property name="provider" ref="configurationProvider"></property>
+		<property name="beanProvider" ref="beanProvider"></property>
+	</bean>
+	<bean id="reducerAgent"
+		class="com.ebao.gs.integration.mapping.reduce.impl.ReducerAgentImpl">
+		<property name="reducerCreater" ref="reducerCreater"></property>
+	</bean>
+</beans>

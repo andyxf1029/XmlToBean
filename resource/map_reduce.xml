@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping-struture>
+	<mappers>
+		<mapper id="root" class="bean:mapper"></mapper>
+	</mappers>
+
+	<reducers>
+	</reducers>
+	<mergers>
+		<merger id="merge" class="com.ebao.as.gs.integration.mapping.merge.USMerger"></merger>
+	</mergers>
+</mapping-struture>
+
