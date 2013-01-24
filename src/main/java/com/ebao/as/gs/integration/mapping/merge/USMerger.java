@@ -3,9 +3,9 @@ package com.ebao.as.gs.integration.mapping.merge;
 import java.util.List;
 import java.util.Map;
 
-import com.ebao.as.integration.acord.bean.ClassificationSOABO;
-import com.ebao.as.integration.acord.bean.LocationSOABO;
-import com.ebao.as.integration.acord.bean.PolicySOABO;
+import com.ebao.gs.integration.core.mapping.ds.bean.ClassificationSOABO;
+import com.ebao.gs.integration.core.mapping.ds.bean.LocationSOABO;
+import com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO;
 import com.ebao.gs.integration.mapping.merge.Merger;
 
 public class USMerger implements Merger {

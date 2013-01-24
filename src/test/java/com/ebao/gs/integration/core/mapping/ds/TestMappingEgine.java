@@ -7,15 +7,12 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.util.Assert;
 import org.xml.sax.SAXException;
 
-import com.ebao.as.integration.acord.bean.PolicySOABO;
+import com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO;
 import com.ebao.gs.integration.mapping.IXMLToBeanEngine;
 import com.ebao.gs.integration.mapping.bean.InputDataSource;
-import com.ebao.gs.integration.mapping.bean.OutputDataSource;
 import com.ebao.gs.integration.mapping.bean.impl.InputXMLDataSource;
-import com.ebao.gs.integration.mapping.impl.XMLToBeanEnigneImpl;
 
 public class TestMappingEgine {
 

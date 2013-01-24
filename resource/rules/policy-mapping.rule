@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules>
-	<ruleSet id="commonPolicy" path="Policy/CommonPolicy" createBean="com.ebao.as.integration.acord.bean.PolicySOABO" >
+	<ruleSet id="commonPolicy" path="Policy/CommonPolicy" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO" >
 		<rule>
 			<acord-path>policyNo</acord-path>
 			<bean-path>policyNo</bean-path>
@@ -11,7 +11,7 @@
 		</rule>
 	</ruleSet>
 	
-	<ruleSet id="commonPolicy2" path="Policy/CommonPolicy" createBean="com.ebao.as.integration.acord.bean.PolicySOABO">
+	<ruleSet id="commonPolicy2" path="Policy/CommonPolicy" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO">
 		<rule>
 			<acord-path>policyId</acord-path>
 			<bean-path>policyID</bean-path>
@@ -23,7 +23,7 @@
 	</ruleSet>
 
 
-	<ruleSet id="loaction" path ="Policy/location" createBean="com.ebao.as.integration.acord.bean.LocationSOABO" >
+	<ruleSet id="loaction" path ="Policy/location" createBean="com.ebao.gs.integration.core.mapping.ds.bean.LocationSOABO" >
 		<rule>
 			<acord-path>locationId</acord-path>
 			<bean-path>locationId</bean-path>
@@ -32,11 +32,11 @@
 
 
 	<ruleSet id="Classification" path="Policy/classifiction"
-		createBean="com.ebao.as.integration.acord.bean.ClassificationSOABO">
+		createBean="com.ebao.gs.integration.core.mapping.ds.bean.ClassificationSOABO">
 		<rule path="coverage" ref="coverage" after="setPolicyCtList" />
 	</ruleSet>
 
-	<ruleSet id="coverage" createBean="com.ebao.as.integration.acord.bean.PolicyCtSOABO">
+	<ruleSet id="coverage" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicyCtSOABO">
 		<rule>
 			<acord-path>premium</acord-path>
 			<bean-path>premium</bean-path>
