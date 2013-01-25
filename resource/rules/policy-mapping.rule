@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rules>
-	<ruleSet id="commonPolicy" path="Policy/CommonPolicy" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO" >
+	<ruleSet id="commonPolicy" path="Policy/CommonPolicy" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO" context = "true" >
 		<rule>
 			<acord-path>policyNo</acord-path>
 			<bean-path>policyNo</bean-path>
@@ -11,7 +11,7 @@
 		</rule>
 	</ruleSet>
 	
-	<ruleSet id="commonPolicy2" path="Policy/CommonPolicy" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO">
+	<ruleSet id="commonPolicy2" path="Policy/CommonPolicy" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicySOABO" context = "true">
 		<rule>
 			<acord-path>policyId</acord-path>
 			<bean-path>policyID</bean-path>

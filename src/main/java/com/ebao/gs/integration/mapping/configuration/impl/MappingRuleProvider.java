@@ -79,6 +79,7 @@ public class MappingRuleProvider implements IMappingRuleProvider {
 		digester.addSetProperties("rules/ruleSet", "createBean",
 				"createBeanName");
 		digester.addSetProperties("rules/ruleSet", "path", "path");
+		digester.addSetProperties("rules/ruleSet", "context", "context");
 		digester.addSetNext("rules/ruleSet", "addRuleSet");
 		Rules bean = digester.parse(file);
 		return bean;

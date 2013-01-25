@@ -46,19 +46,20 @@ public class DefaultReducer implements Reducer {
 		List<RuleSet> rules = this.rulePorvider.loadRuleSetByKey(pair.getKey());
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		for (RuleSet ruleSet : rules) {
-			this.processListData(pair, resultMap, ruleSet,contextMap);
+			this.processListData(pair, resultMap, ruleSet, contextMap);
 		}
 
 		return resultMap;
 	}
 
 	private void processListData(Pair pair, Map<String, Object> resultMap,
-			RuleSet ruleSet, Map<String, Object> contextMap) throws InstantiationException,
-			IllegalAccessException, ClassNotFoundException, IOException,
-			SAXException {
+			RuleSet ruleSet, Map<String, Object> contextMap)
+			throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException, IOException, SAXException {
 		List<Object> targetBeanList = new ArrayList<Object>();
 		for (Object source : (List<Object>) pair.getValues()) {
-			targetBeanList.add(this.callRules(source, resultMap, ruleSet,contextMap));
+			targetBeanList.add(this.callRules(source, resultMap, ruleSet,
+					contextMap));
 		}
 
 		resultMap.put(ruleSet.getId(), targetBeanList);
@@ -76,11 +77,11 @@ public class DefaultReducer implements Reducer {
 	}
 
 	private Object callRules(Object value, Map<String, Object> map,
-			RuleSet ruleSet, Map<String, Object> contextMap) throws InstantiationException,
-			IllegalAccessException, ClassNotFoundException, IOException,
-			SAXException {
+			RuleSet ruleSet, Map<String, Object> contextMap)
+			throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException, IOException, SAXException {
 		List<Rule> rules = ruleSet.getRules();
-		Object targetBean = this.createBean(ruleSet.getCreateBeanName(),contextMap);
+		Object targetBean = this.createBean(ruleSet, contextMap);
 		Object context = beanSetter.createBeanContext(targetBean);
 		for (Rule rule : rules) {
 			if (haveRefRule(rule)) {
@@ -88,7 +89,7 @@ public class DefaultReducer implements Reducer {
 						.loadRuleSetByKey(rule.getRef());
 				Pair refPair = this.getRefPair(rule, value);
 				for (RuleSet ruleSetRef : ruleSetRefList) {
-					this.processListData(refPair, map, ruleSetRef,contextMap);
+					this.processListData(refPair, map, ruleSetRef, contextMap);
 					this.doAfter(map, targetBean, rule, ruleSetRef);
 				}
 
@@ -143,16 +144,26 @@ public class DefaultReducer implements Reducer {
 		return StringUtils.isNotEmpty(rule.getSpecialRule());
 	}
 
-	private Object createBean(String createBeanName, Map<String, Object> contextMap)
+	private Object createBean(RuleSet ruleSet, Map<String, Object> contextMap)
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
-		if (contextMap.containsKey(createBeanName)) {
-			return contextMap.get(createBeanName);
+		if (!this.contextFlagIsTrue(ruleSet.getContext())) {
+			return Class.forName(ruleSet.getCreateBeanName()).newInstance();
+		} else {
+			if (contextMap.containsKey(ruleSet.getCreateBeanName())) {
+				return contextMap.get(ruleSet.getCreateBeanName());
+			} else {
+				Object createBean = Class.forName(ruleSet.getCreateBeanName())
+						.newInstance();
+				contextMap.put(ruleSet.getCreateBeanName(), createBean);
+				return createBean;
+			}
+
 		}
-		
-		Object createBean =Class.forName(createBeanName).newInstance();
-		contextMap.put(createBeanName, createBean);
-		return createBean;
+	}
+
+	private boolean contextFlagIsTrue(String context) {
+		return StringUtils.isNotBlank(context) && "true".equals(context);
 	}
 
 	public void setDataFetcher(IDataFetcher dataFetcher) {

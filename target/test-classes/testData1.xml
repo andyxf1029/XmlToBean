@@ -1,11 +1,11 @@
 <Policy>
 	<CommonPolicy>
 		<policyNo>111</policyNo>
+		<policyId>2234</policyId>
 	</CommonPolicy>
 	<QuotoInfo>
 		<QuotNo>222</QuotNo>
 	</QuotoInfo>
-
 	<location>
 		<locationId>1223</locationId>
 	</location>

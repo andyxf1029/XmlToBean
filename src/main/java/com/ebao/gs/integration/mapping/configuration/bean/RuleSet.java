@@ -11,6 +11,8 @@ public class RuleSet {
 
 	private String path;
 
+	private String context;
+
 	private List<Rule> rules = new ArrayList<Rule>();
 
 	public void addRule(Rule rule) {
@@ -49,6 +51,14 @@ public class RuleSet {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getContext() {
+		return context;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
 	}
 
 }
