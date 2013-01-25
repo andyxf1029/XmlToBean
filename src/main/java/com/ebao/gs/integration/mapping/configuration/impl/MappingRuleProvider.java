@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.digester3.Digester;
+import org.apache.commons.lang.StringUtils;
 import org.xml.sax.SAXException;
 
 import com.ebao.gs.integration.framework.aop.Cacheable;
@@ -27,7 +28,7 @@ public class MappingRuleProvider implements IMappingRuleProvider {
 
 	private String folderName;
 
-	@Cacheable(key="file")
+	@Cacheable(key = "file")
 	private Rules loadAllRuleSet() throws IOException, SAXException {
 		Collection fileList = multipleFileReader
 				.loadRulesByFolderName(folderName);
@@ -39,6 +40,18 @@ public class MappingRuleProvider implements IMappingRuleProvider {
 
 		return resultBean;
 
+	}
+
+	public List<RuleSet> loadAllRuleSetPath() throws IOException, SAXException {
+		Rules rules = this.loadAllRuleSet();
+		List<RuleSet> resultRuleSet = new ArrayList<RuleSet>();
+		for (RuleSet ruleSet : rules.getRuleSetList()) {
+			if (StringUtils.isNotBlank(ruleSet.getPath())) {
+				resultRuleSet.add(ruleSet);
+			}
+		}
+
+		return resultRuleSet;
 	}
 
 	private void mergeRuleSet(Rules resultBean, Rules bean) {
@@ -65,12 +78,13 @@ public class MappingRuleProvider implements IMappingRuleProvider {
 		digester.addSetProperties("rules/ruleSet", "id", "id");
 		digester.addSetProperties("rules/ruleSet", "createBean",
 				"createBeanName");
+		digester.addSetProperties("rules/ruleSet", "path", "path");
 		digester.addSetNext("rules/ruleSet", "addRuleSet");
 		Rules bean = digester.parse(file);
 		return bean;
 	}
 
-	@Cacheable(key="rules")
+	@Cacheable(key = "rules")
 	public List<RuleSet> loadRuleSetByKey(String key) throws IOException,
 			SAXException {
 		List<RuleSet> result = new ArrayList<RuleSet>();

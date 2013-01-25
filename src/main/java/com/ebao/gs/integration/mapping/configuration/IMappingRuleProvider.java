@@ -11,6 +11,9 @@ public interface IMappingRuleProvider {
 
 	List<RuleSet> loadRuleSetByKey(String key) throws IOException, SAXException;
 
-	List<RuleSet> loadRuleSetByFilePath(String path) throws IOException, SAXException;
+	List<RuleSet> loadRuleSetByFilePath(String path) throws IOException,
+			SAXException;
+
+	List<RuleSet> loadAllRuleSetPath() throws IOException, SAXException;
 
 }

@@ -9,6 +9,8 @@ public class RuleSet {
 
 	private String createBeanName;
 
+	private String path;
+
 	private List<Rule> rules = new ArrayList<Rule>();
 
 	public void addRule(Rule rule) {
@@ -38,7 +40,15 @@ public class RuleSet {
 	@Override
 	public String toString() {
 		return "RuleSet [id=" + id + ", createBeanName=" + createBeanName
-				+ ", rules=" + rules + "]";
+				+ ", path=" + path + ", rules=" + rules + "]";
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }

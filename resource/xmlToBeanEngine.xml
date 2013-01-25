@@ -7,7 +7,7 @@
 	<aop:aspectj-autoproxy />
 
 
-	<bean id="CacheAspect" class="com.ebao.gs.integration.mapping.aop.CacheAspect">
+	<bean id="CacheAspect" class="com.ebao.gs.integration.framework.aop.CacheAspect">
 		<property name="keyBuilder" ref="keyBuilder" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
@@ -16,13 +16,16 @@
 	<bean id="TimeAspect" class="org.perf4j.javalog.aop.TimingAspect"/> 
 
 	<bean id="keyBuilder"
-		class="com.ebao.gs.integration.mapping.aop.CacheKeyDefaultBuilder"></bean>
+		class="com.ebao.gs.integration.framework.aop.CacheKeyDefaultBuilder"></bean>
+
+	<bean id ="DefaultMapper" class="com.ebao.gs.integration.mapping.mapper.impl.DefaultMapper">
+	<property name="rulePorvider" ref="MappingRuleProvider"></property>
+	</bean>
 
 	<bean id="cacheManager"
 		class="com.ebao.gs.integration.framework.cache.impl.EhcacheManagerImpl">
 		<property name="basePathProvider" ref="basePathProvider"></property>
 		<property name="configurationName" value="Ehcache-Config.xml"></property>
-		
 		</bean>
 
 	<bean id="XMLToBeanEnigne"
