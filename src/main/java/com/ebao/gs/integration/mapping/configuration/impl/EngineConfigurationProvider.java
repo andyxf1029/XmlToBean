@@ -10,7 +10,7 @@ import org.apache.commons.digester3.Digester;
 import org.springframework.util.Assert;
 import org.xml.sax.SAXException;
 
-import com.ebao.gs.integration.mapping.aop.Cacheable;
+import com.ebao.gs.integration.framework.aop.Cacheable;
 import com.ebao.gs.integration.mapping.configuration.IEngineConfigurationProvider;
 import com.ebao.gs.integration.mapping.configuration.bean.MapAndReducerBean;
 import com.ebao.gs.integration.mapping.configuration.bean.MapperDefinition;

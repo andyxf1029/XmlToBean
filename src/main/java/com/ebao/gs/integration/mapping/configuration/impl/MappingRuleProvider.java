@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.commons.digester3.Digester;
 import org.xml.sax.SAXException;
 
-import com.ebao.gs.integration.mapping.aop.Cacheable;
+import com.ebao.gs.integration.framework.aop.Cacheable;
 import com.ebao.gs.integration.mapping.configuration.IMappingRuleProvider;
 import com.ebao.gs.integration.mapping.configuration.IMultipleFileReader;
 import com.ebao.gs.integration.mapping.configuration.bean.Rule;

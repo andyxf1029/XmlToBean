@@ -2,7 +2,7 @@ package com.ebao.gs.integration.mapping.helper.impl;
 
 import org.apache.commons.jxpath.JXPathContext;
 
-import com.ebao.gs.integration.mapping.aop.Cacheable;
+import com.ebao.gs.integration.framework.aop.Cacheable;
 import com.ebao.gs.integration.mapping.helper.IDataFetcher;
 
 public class JxpathDataFetcher implements IDataFetcher {
