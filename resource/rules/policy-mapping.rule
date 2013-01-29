@@ -33,20 +33,19 @@
 
 	<ruleSet id="Classification" path="Policy/classifiction"
 		createBean="com.ebao.gs.integration.core.mapping.ds.bean.ClassificationSOABO">
-		<rule path="coverage" ref="coverage" after="setPolicyCtList" />
+		<rule path="coverage" ref="coverage" after="native:addList?fieldName=policyCtList" />
 	</ruleSet>
 
 	<ruleSet id="coverage" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicyCtSOABO">
 		<rule>
 			<acord-path>premium</acord-path>
+			<default-value>5555</default-value>
 			<bean-path>premium</bean-path>
 			<!-- class:com.ebao.gs.integration.mapping.tools.impl.CodeTableUtils?method=format -->
 			<tools>bean:codeTable?method=convert@codetable=T_AS@perCondition=id=5
 			</tools>
 		</rule>
 	</ruleSet>
-
-
 
 
 </rules>

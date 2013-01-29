@@ -1,7 +1,7 @@
 package com.ebao.gs.integration.framework.cache.impl;
 
+import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -22,7 +22,7 @@ public class EhcacheManagerImpl implements ICacheManager, InitializingBean {
 			this.cacheManager.addCache(region);
 		}
 
-		Ehcache cache = this.cacheManager.getCache(region);
+		Cache cache = this.cacheManager.getCache(region);
 		cache.put(new Element(key, value));
 	}
 
@@ -31,12 +31,12 @@ public class EhcacheManagerImpl implements ICacheManager, InitializingBean {
 			return false;
 		}
 
-		Ehcache cache = this.cacheManager.getCache(region);
+		Cache cache = this.cacheManager.getCache(region);
 		return cache.getKeys() != null && cache.getKeys().contains(key);
 	}
 
 	public Object get(String region, String key) {
-		Ehcache cache = this.cacheManager.getCache(region);
+		Cache cache = this.cacheManager.getCache(region);
 		return cache.get(key).getValue();
 	}
 

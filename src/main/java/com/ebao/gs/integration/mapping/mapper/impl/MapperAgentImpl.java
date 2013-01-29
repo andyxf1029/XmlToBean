@@ -33,7 +33,7 @@ public class MapperAgentImpl implements MapperAgent, ApplicationContextAware {
 		List<Pair> pairList = new ArrayList<Pair>();
 		List<MapperDefinition> mapperDefinitions = configurationProvider
 				.loadMappers();
-		if (mapperDefinitions != null && !mapperDefinitions.isEmpty()) {
+		if (this.haveMapperDefination(mapperDefinitions)) {
 			for (MapperDefinition mapperDefinition : configurationProvider
 					.loadMappers()) {
 				Mapper mapper = beanProvider.fetch(
@@ -45,6 +45,11 @@ public class MapperAgentImpl implements MapperAgent, ApplicationContextAware {
 		}
 
 		return pairList;
+	}
+
+	private boolean haveMapperDefination(
+			List<MapperDefinition> mapperDefinitions) {
+		return mapperDefinitions != null && !mapperDefinitions.isEmpty();
 	}
 
 	private Mapper createDefaultMapper() {

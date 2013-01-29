@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.187 sec
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 sec

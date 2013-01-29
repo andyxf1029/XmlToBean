@@ -10,6 +10,8 @@ public class Rule {
 
 	private String beanPath;
 
+	private String defaultValue;
+
 	private String tool;
 
 	private String after;
@@ -51,7 +53,8 @@ public class Rule {
 	@Override
 	public String toString() {
 		return "Rule [path=" + path + ", ref=" + ref + ", acordPath="
-				+ acordPath + ", beanPath=" + beanPath + ", tool=" + tool
+				+ acordPath + ", beanPath=" + beanPath + ", defaultValue="
+				+ defaultValue + ", tool=" + tool + ", after=" + after
 				+ ", specialRule=" + specialRule + "]";
 	}
 
@@ -77,6 +80,14 @@ public class Rule {
 
 	public void setAfter(String after) {
 		this.after = after;
+	}
+
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 }

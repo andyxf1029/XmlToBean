@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.ebao.gs.integration.core.mapping.ds.ToolsProviderTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
-test(com.ebao.gs.integration.core.mapping.ds.ToolsProviderTest)  Time elapsed: 0.002 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
+test(com.ebao.gs.integration.core.mapping.ds.ToolsProviderTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.ClassNotFoundException: com.ebao.gs.integration.mapping.tools.CodeTableUtils
 	at java.net.URLClassLoader$1.run(URLClassLoader.java:202)
 	at java.security.AccessController.doPrivileged(Native Method)

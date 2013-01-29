@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.transform.TransformerException;
+
 import org.perf4j.aop.Profiled;
 import org.xml.sax.SAXException;
 
@@ -27,8 +29,8 @@ public class ReducerAgentImpl implements ReducerAgent {
 	 * com.ebao.gs.integration.mapping.configuration.reduce.ReducerAgent#process
 	 * (java.util.List)
 	 */
-	
-	@Profiled(message="ReducerAgentImpl")
+
+	@Profiled(message = "ReducerAgentImpl")
 	public Map<String, Object> process(List<Pair> pairs)
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException, IOException, SAXException {
@@ -43,13 +45,26 @@ public class ReducerAgentImpl implements ReducerAgent {
 	}
 
 	/**
-	 * if concurrent run , pls change to ConcurrentMap
+	 * if concurrent Reducer , pls change to ConcurrentMap
 	 * 
 	 * @return
 	 */
 	private Map<String, Object> createContextMap() {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		return contextMap;
+	}
+
+	public Map<String, Object> process(List<Pair> mapperpairList,
+			Map<String, String> conditionMap) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException, SAXException, TransformerException {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> contextMap = createContextMap();
+		for (Pair pair : mapperpairList) {
+			resultMap.putAll(reducerCreater.createReducer(pair.getKey())
+					.reduce(pair, contextMap,conditionMap));
+		}
+
+		return resultMap;
+
 	}
 
 }

@@ -27,7 +27,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/FY/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf7765584310451000149.tmp"/>
+    <property name="classworlds.conf" value="/Users/FY/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf2263847120204533326.tmp"/>
     <property name="sun.jnu.encoding" value="EUC_CN"/>
     <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -64,7 +64,7 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.002" classname="com.ebao.gs.integration.core.mapping.ds.ToolsProviderTest" name="test">
+  <testcase time="0.001" classname="com.ebao.gs.integration.core.mapping.ds.ToolsProviderTest" name="test">
     <error message="com.ebao.gs.integration.mapping.tools.CodeTableUtils" type="java.lang.ClassNotFoundException">java.lang.ClassNotFoundException: com.ebao.gs.integration.mapping.tools.CodeTableUtils
 	at java.net.URLClassLoader$1.run(URLClassLoader.java:202)
 	at java.security.AccessController.doPrivileged(Native Method)

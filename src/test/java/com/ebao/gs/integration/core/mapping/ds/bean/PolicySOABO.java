@@ -8,6 +8,8 @@ public class PolicySOABO {
 
 	private String policyNo;
 
+	private String GLPolicyNo;
+
 	private List<LocationSOABO> lociationList;
 
 	private List<ClassificationSOABO> classificationList;
@@ -39,8 +41,9 @@ public class PolicySOABO {
 	@Override
 	public String toString() {
 		return "PolicySOABO [policyID=" + policyID + ", policyNo=" + policyNo
-				+ ", lociationList=" + lociationList + ", classificationList="
-				+ classificationList + "]";
+				+ ", GLPolicyNo=" + GLPolicyNo + ", lociationList="
+				+ lociationList + ", classificationList=" + classificationList
+				+ "]";
 	}
 
 	public List<ClassificationSOABO> getClassificationList() {
@@ -50,6 +53,14 @@ public class PolicySOABO {
 	public void setClassificationList(
 			List<ClassificationSOABO> classificationList) {
 		this.classificationList = classificationList;
+	}
+
+	public String getGLPolicyNo() {
+		return GLPolicyNo;
+	}
+
+	public void setGLPolicyNo(String gLPolicyNo) {
+		GLPolicyNo = gLPolicyNo;
 	}
 
 }

@@ -12,10 +12,10 @@ import org.springframework.util.ReflectionUtils;
 
 import com.ebao.gs.integration.mapping.helper.constants.BeanType;
 import com.ebao.gs.integration.mapping.utils.BeanTypeUtils;
+import com.ebao.gs.integration.mapping.utils.ParameterUtils;
 
 public abstract class BeanHelper implements ApplicationContextAware {
-	
-	
+
 	public static final String METHOD = "method";
 	public static final String CODE_TABLE = "codeTable";
 	public static final String PRE_CONDITION = "preCondition";
@@ -41,21 +41,7 @@ public abstract class BeanHelper implements ApplicationContextAware {
 			Object toolsInstance);
 
 	protected Map<String, String> getParameters(String toolName) {
-		int index = StringUtils.indexOf(toolName, "?");
-		if (index > 0) {
-			Map<String, String> parametersMap = new HashMap<String, String>();
-			String parameters = StringUtils.substringAfter(toolName, "?");
-			String[] parameterList = StringUtils.split(parameters, "@");
-			for (String parameterPair : parameterList) {
-				String[] parameter = StringUtils.split(parameterPair, "=");
-				if (parameter.length > 0) {
-					parametersMap.put(parameter[0], parameter[1]);
-				}
-			}
-			return parametersMap;
-		}
-
-		return null;
+		return ParameterUtils.getParameters(toolName);
 	}
 
 	protected Object getInstance(String tool) throws InstantiationException,

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.transform.TransformerException;
+
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.ReflectionUtils;
@@ -20,6 +22,8 @@ import com.ebao.gs.integration.mapping.helper.IBeanDataSetter;
 import com.ebao.gs.integration.mapping.helper.IDataFetcher;
 import com.ebao.gs.integration.mapping.helper.ISpecialRuleProvider;
 import com.ebao.gs.integration.mapping.helper.IToolsProiver;
+import com.ebao.gs.integration.mapping.reduce.after.impl.BeanArrayListUtil;
+import com.ebao.gs.integration.mapping.utils.ParameterUtils;
 
 public class DefaultReducer implements Reducer {
 
@@ -52,6 +56,21 @@ public class DefaultReducer implements Reducer {
 		return resultMap;
 	}
 
+	public Map<? extends String, ? extends Object> reduce(Pair pair,
+			Map<String, Object> contextMap, Map<String, String> conditionMap)
+			throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException, IOException, SAXException,
+			TransformerException {
+		List<RuleSet> rules = this.rulePorvider.loadRuleSetByKey(pair.getKey(),
+				conditionMap);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		for (RuleSet ruleSet : rules) {
+			this.processListData(pair, resultMap, ruleSet, contextMap);
+		}
+
+		return resultMap;
+	}
+
 	private void processListData(Pair pair, Map<String, Object> resultMap,
 			RuleSet ruleSet, Map<String, Object> contextMap)
 			throws InstantiationException, IllegalAccessException,
@@ -68,8 +87,12 @@ public class DefaultReducer implements Reducer {
 	private Object getSourceValue(Object value, Rule rule)
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
-		if (!this.haveSpecialRule(rule)) {
+		if (!this.haveSpecialRule(rule)
+				&& StringUtils.isBlank(rule.getDefaultValue())) {
 			return this.dataFetcher.getValue(value, rule.getAcordPath());
+		} else if (StringUtils.isNotBlank(rule.getDefaultValue())
+				&& StringUtils.isBlank(rule.getAcordPath())) {
+			return rule.getDefaultValue();
 		} else {
 			return this.specialRuleProvider.call(rule.getSpecialRule(), value);
 		}
@@ -110,11 +133,22 @@ public class DefaultReducer implements Reducer {
 	private void doAfter(Map<String, Object> map, Object targetBean, Rule rule,
 			RuleSet ruleSetRef) {
 		if (StringUtils.isNotBlank(rule.getAfter())) {
-			Object result = map.get(ruleSetRef.getId());
-			Method method = ReflectionUtils.findMethod(targetBean.getClass(),
-					rule.getAfter(), new Class[] { this.getArgType(result) });
-			ReflectionUtils.invokeMethod(method, targetBean,
-					new Object[] { result });
+			if (rule.getAfter().startsWith("native:addList")) {
+				Map<String, String> parameterMap = ParameterUtils
+						.getParameters(rule.getAfter());
+				Object result = map.get(ruleSetRef.getId());
+				BeanArrayListUtil.addList(targetBean, result,
+						parameterMap.get("fieldName"));
+			} else {
+
+				Object result = map.get(ruleSetRef.getId());
+				Method method = ReflectionUtils.findMethod(
+						targetBean.getClass(), rule.getAfter(),
+						new Class[] { this.getArgType(result) });
+				ReflectionUtils.invokeMethod(method, targetBean,
+						new Object[] { result });
+			}
+
 		}
 	}
 

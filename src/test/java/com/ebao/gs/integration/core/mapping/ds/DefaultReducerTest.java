@@ -10,13 +10,13 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import com.ebao.as.gs.integration.mapping.mapper.PolicyMapper;
 import com.ebao.gs.integration.mapping.bean.Pair;
 import com.ebao.gs.integration.mapping.bean.impl.InputXMLDataSource;
 import com.ebao.gs.integration.mapping.configuration.impl.MappingRuleProvider;
 import com.ebao.gs.integration.mapping.helper.impl.JXpathBeanDataSetter;
 import com.ebao.gs.integration.mapping.helper.impl.JxpathDataFetcher;
 import com.ebao.gs.integration.mapping.helper.impl.SpecialRuleProvider;
+import com.ebao.gs.integration.mapping.mapper.impl.DefaultMapper;
 import com.ebao.gs.integration.mapping.reduce.DefaultReducer;
 
 public class DefaultReducerTest {
@@ -26,7 +26,7 @@ public class DefaultReducerTest {
 			IllegalAccessException, ClassNotFoundException, SAXException {
 		String xml = FileUtils.readFileToString(new File(
 				"src/test/java/testData1.xml"));
-		PolicyMapper mapper = new PolicyMapper();
+		DefaultMapper mapper = new DefaultMapper();
 		InputXMLDataSource<String> xmlData = new InputXMLDataSource<String>(xml);
 		List<Pair> pairList = mapper.map(xmlData);
 		for (Pair pair : pairList) {
@@ -36,7 +36,7 @@ public class DefaultReducerTest {
 			reducer.setBeanSetter(new JXpathBeanDataSetter());
 			reducer.setDataFetcher(new JxpathDataFetcher());
 			reducer.setSpecialRuleProvider(new SpecialRuleProvider());
-			Map<String, Object> resultMap = reducer.reduce(pair , new HashMap());
+			Map<String, Object> resultMap = reducer.reduce(pair, new HashMap());
 			System.out.println(resultMap);
 
 		}

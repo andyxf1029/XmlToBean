@@ -34,8 +34,6 @@
 		<property name="reducerAgent" ref="reducerAgent"></property>
 		<property name="mergeAgent" ref="mergeAgent"></property>
 	</bean>
-	<!-- US mapper : MOVE to project cust xml bean file -->
-	<bean id="mapper" class="com.ebao.as.gs.integration.mapping.mapper.PolicyMapper"></bean>
 	<!-- test tools Util -->
 
 	<bean id="codeTable"

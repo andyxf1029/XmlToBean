@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.186" errors="0" skipped="0" tests="6" name="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest">
+<testsuite failures="0" time="0.188" errors="0" skipped="0" tests="6" name="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -27,7 +27,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/FY/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf7765584310451000149.tmp"/>
+    <property name="classworlds.conf" value="/Users/FY/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf2263847120204533326.tmp"/>
     <property name="sun.jnu.encoding" value="EUC_CN"/>
     <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -64,10 +64,10 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.125" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testLoadALl"/>
-  <testcase time="0.013" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testLoadMapper"/>
-  <testcase time="0.017" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testloadAllMappers"/>
+  <testcase time="0.148" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testLoadALl"/>
+  <testcase time="0.009" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testLoadMapper"/>
+  <testcase time="0.006" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testloadAllMappers"/>
   <testcase time="0.007" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testloadAllReducer"/>
-  <testcase time="0.012" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testloadReducerByKey"/>
-  <testcase time="0.01" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testloadMerge"/>
+  <testcase time="0.007" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testloadReducerByKey"/>
+  <testcase time="0.008" classname="com.ebao.gs.integration.core.mapping.ds.EngineConfigurationProviderTest" name="testloadMerge"/>
 </testsuite>
