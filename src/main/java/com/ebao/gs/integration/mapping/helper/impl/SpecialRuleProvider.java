@@ -6,15 +6,18 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.jdom.Element;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
 import clojure.lang.RT;
 import clojure.lang.Var;
 
+import com.alibaba.fastjson.JSON;
 import com.ebao.gs.integration.mapping.helper.ISpecialRuleProvider;
 import com.ebao.gs.integration.mapping.utils.BeanTypeUtils;
 import com.ebao.gs.integration.mapping.utils.ParameterUtils;
+import com.ebao.gs.integration.mapping.utils.XMLUtils;
 
 public class SpecialRuleProvider extends BeanHelper implements
 		ISpecialRuleProvider {
@@ -26,6 +29,7 @@ public class SpecialRuleProvider extends BeanHelper implements
 		this.cljPath = cljPath;
 	}
 
+	
 	public Object call(String ruleName, Object value)
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException, IOException {
@@ -38,7 +42,8 @@ public class SpecialRuleProvider extends BeanHelper implements
 					.getParameters(ruleName);
 			String method = paramMap.get(METHOD);
 			Var var = RT.var(DEFAULT_NAME_SPACE, method);
-			return var.invoke(value, paramMap);
+			return var.invoke(XMLUtils.domToString((Element) value),
+					JSON.toJSONString(paramMap));
 
 		}
 
