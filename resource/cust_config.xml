@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- base file path is app_config -->
+<configuration-cust>
+
+
+
+	<ruleSet>
+		<fileName>testData.xml</fileName>
+		<rule>
+			<targetPath>Test/condition
+			</targetPath>
+			<replaceValue>23444</replaceValue>
+		</rule>
+		<conditions>
+			<condition id="BU">11</condition>
+			<condition id="PROM">2</condition>
+		</conditions>
+	</ruleSet>
+
+	<!-- <ruleSet> <fileName>Ct-mapping.rule</fileName> <rule> <targetPath>ruleSet/rule[acordPath='ct/premium']/beanPath 
+		</targetPath> <replaceValue>PRMEPremium</replaceValue> </rule> <conditions> 
+		<condition id="BinessUnitCode">33</condition> <condition id="ProgramCode">103</condition> 
+		</conditions> </ruleSet> -->
+</configuration-cust>

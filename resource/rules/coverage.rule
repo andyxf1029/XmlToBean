@@ -1,0 +1,14 @@
+<rules>
+<ruleSet id="coverage" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicyCtSOABO">
+		<rule>
+			<default-value>5555</default-value>
+			<bean-path>premium</bean-path>
+			<!-- class:com.ebao.gs.integration.mapping.tools.impl.CodeTableUtils?method=format -->
+			<tools>
+			</tools>
+		</rule>
+	</ruleSet>
+	
+	</rules>
+	
+	
