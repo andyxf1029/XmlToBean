@@ -23,6 +23,7 @@ import com.ebao.gs.integration.mapping.configuration.bean.Rule;
 import com.ebao.gs.integration.mapping.configuration.bean.RuleSet;
 import com.ebao.gs.integration.mapping.configuration.bean.Rules;
 import com.ebao.gs.integration.mapping.helper.IFileLoader;
+import com.ebao.gs.integration.mapping.utils.ParameterUtils;
 
 /**
  * 
@@ -76,16 +77,13 @@ public class MappingRuleProvider implements IMappingRuleProvider {
 		for (Object object : fileList) {
 			File file = (File) object;
 			InputStream source = this.fileLoader.load(file.getName(),
-					this.getFilePath(), conditionMap);
+					ParameterUtils.buildFilePath(
+							this.basePathProvider.getBasePath(),
+							this.folderName), conditionMap);
 			this.mergeRuleSet(resultBean, this.getRules(source));
 		}
 
 		return resultBean;
-	}
-
-	private String getFilePath() {
-		return this.basePathProvider.getBasePath() + File.separator
-				+ this.folderName;
 	}
 
 	private Rules getRules(InputStream source) throws IOException, SAXException {

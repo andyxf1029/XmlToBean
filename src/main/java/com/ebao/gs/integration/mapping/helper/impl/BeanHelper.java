@@ -1,7 +1,8 @@
 package com.ebao.gs.integration.mapping.helper.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -9,6 +10,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.ReflectionUtils;
+
+import clojure.lang.RT;
+import clojure.lang.Var;
 
 import com.ebao.gs.integration.mapping.helper.constants.BeanType;
 import com.ebao.gs.integration.mapping.utils.BeanTypeUtils;
@@ -27,9 +31,8 @@ public abstract class BeanHelper implements ApplicationContextAware {
 		this.applicationContext = applicationContext;
 	}
 
-	public Object call(String tool, Object value)
-			throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
+	public Object run(String tool, Object value) throws InstantiationException,
+			IllegalAccessException, ClassNotFoundException {
 		Map<String, String> parametersMap = this.getParameters(tool);
 		Object toolsInstance = this.getInstance(tool);
 		Object[] args = this.buildArgs(value, parametersMap);
@@ -56,6 +59,8 @@ public abstract class BeanHelper implements ApplicationContextAware {
 
 		return null;
 	}
+
+	
 
 	protected Object[] buildArgs(Object value, Map<String, String> parametersMap) {
 		return new Object[] { value, parametersMap };

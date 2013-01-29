@@ -11,16 +11,20 @@ import org.springframework.util.Assert;
 import org.xml.sax.SAXException;
 
 import com.ebao.gs.integration.framework.aop.Cacheable;
+import com.ebao.gs.integration.framework.common.IBasePathProvider;
 import com.ebao.gs.integration.mapping.configuration.IEngineConfigurationProvider;
 import com.ebao.gs.integration.mapping.configuration.bean.MapAndReducerBean;
 import com.ebao.gs.integration.mapping.configuration.bean.MapperDefinition;
 import com.ebao.gs.integration.mapping.configuration.bean.MergeBean;
 import com.ebao.gs.integration.mapping.configuration.bean.ReducerDefinition;
+import com.ebao.gs.integration.mapping.utils.ParameterUtils;
 
 public class EngineConfigurationProvider implements
 		IEngineConfigurationProvider {
 
-	private String mapReducePath;
+	private IBasePathProvider basePathProvider;
+
+	private String mapReduceName;
 
 	public List<MapperDefinition> loadMappers() throws IOException,
 			SAXException {
@@ -94,14 +98,19 @@ public class EngineConfigurationProvider implements
 		digester.addSetNext("mapping-struture/mappers/mapper", "addMapper");
 		digester.addSetNext("mapping-struture/reducers/reducer", "addReducer");
 		digester.addSetNext("mapping-struture/mergers/merger", "setMerger");
-		MapAndReducerBean bean = digester.parse(new File(
-				"resource/map_reduce.xml"));
+		String basePath = this.basePathProvider.getBasePath();
+		MapAndReducerBean bean = digester.parse(new File(ParameterUtils
+				.buildFilePath(basePath, this.mapReduceName)));
 		return bean;
 
 	}
 
-	public void setMapReducePath(String mapReducePath) {
-		this.mapReducePath = mapReducePath;
+	public void setBasePathProvider(IBasePathProvider basePathProvider) {
+		this.basePathProvider = basePathProvider;
+	}
+
+	public void setMapReduceName(String mapReduceName) {
+		this.mapReduceName = mapReduceName;
 	}
 
 }

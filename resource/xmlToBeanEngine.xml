@@ -11,22 +11,23 @@
 		<property name="keyBuilder" ref="keyBuilder" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
-	
-	
-	<bean id="TimeAspect" class="org.perf4j.javalog.aop.TimingAspect"/> 
+
+
+	<bean id="TimeAspect" class="org.perf4j.javalog.aop.TimingAspect" />
 
 	<bean id="keyBuilder"
 		class="com.ebao.gs.integration.framework.aop.CacheKeyDefaultBuilder"></bean>
 
-	<bean id ="DefaultMapper" class="com.ebao.gs.integration.mapping.mapper.impl.DefaultMapper">
-	<property name="rulePorvider" ref="MappingRuleProvider"></property>
+	<bean id="DefaultMapper"
+		class="com.ebao.gs.integration.mapping.mapper.impl.DefaultMapper">
+		<property name="rulePorvider" ref="MappingRuleProvider"></property>
 	</bean>
 
 	<bean id="cacheManager"
 		class="com.ebao.gs.integration.framework.cache.impl.EhcacheManagerImpl">
 		<property name="basePathProvider" ref="basePathProvider"></property>
 		<property name="configurationName" value="Ehcache-Config.xml"></property>
-		</bean>
+	</bean>
 
 	<bean id="XMLToBeanEnigne"
 		class="com.ebao.gs.integration.mapping.impl.XMLToBeanEnigneImpl">
@@ -53,10 +54,24 @@
 	<bean id="MappingRuleProvider"
 		class="com.ebao.gs.integration.mapping.configuration.impl.MappingRuleProvider">
 		<property name="multipleFileReader" ref="multipleFileReader"></property>
+		<property name="fileLoader" ref="DefaultFileLoader"></property>
 		<property name="folderName" value="rules"></property>
+		<property name="basePathProvider" ref="basePathProvider"></property>
+	</bean>
+
+	<bean id="DefaultFileLoader"
+		class="com.ebao.gs.integration.mapping.helper.impl.DefaultFileLoader">
+		<property name="custProvider" ref="ConfigurationCustProvider"></property>
+	</bean>
+
+	<bean id="ConfigurationCustProvider"
+		class="com.ebao.gs.integration.framework.configuration.cust.impl.ConfigurationCustProvider">
+		<property name="xmlLoader" ref="XMLConfigurationLoader"></property>
 	</bean>
 
 
+	<bean id="XMLConfigurationLoader"
+		class="com.ebao.gs.integration.framework.configuration.cust.helper.impl.XMLConfigurationLoader"></bean>
 	<bean id="multipleFileReader"
 		class="com.ebao.gs.integration.mapping.configuration.impl.MultipleFileReader">
 		<property name="basePathProvider" ref="basePathProvider"></property>
@@ -73,11 +88,17 @@
 		class="com.ebao.gs.integration.mapping.helper.impl.JxpathDataFetcher"></bean>
 
 	<bean id="SpecialRuleProvider"
-		class="com.ebao.gs.integration.mapping.helper.impl.SpecialRuleProvider"></bean>
+		class="com.ebao.gs.integration.mapping.helper.impl.SpecialRuleProvider">
+		<property name="cljPath" value="com/ebao/gs/integration/framework/clj"></property>
+		</bean>
 
 
 	<bean id="configurationProvider"
-		class="com.ebao.gs.integration.mapping.configuration.impl.EngineConfigurationProvider"></bean>
+		class="com.ebao.gs.integration.mapping.configuration.impl.EngineConfigurationProvider">
+		<property name="basePathProvider" ref="basePathProvider"></property>
+		<property name="mapReduceName" value="map_reduce.xml"></property>
+
+	</bean>
 
 	<bean id="beanProvider"
 		class="com.ebao.gs.integration.mapping.helper.impl.BeanProviderImpl"></bean>

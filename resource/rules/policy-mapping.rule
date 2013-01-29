@@ -17,7 +17,7 @@
 			<bean-path>policyID</bean-path>
 			<tools><!-- tools name in spring -->
 			</tools>
-			<special-rule><!-- spring bean, clojure.method ,class .method -->
+			<special-rule>class:com.ebao.gs.integration.mapping.rule.impl.DefaultSpecialRule?method=call
 			</special-rule>
 		</rule>
 	</ruleSet>
@@ -36,16 +36,7 @@
 		<rule path="coverage" ref="coverage" after="native:addList?fieldName=policyCtList" />
 	</ruleSet>
 
-	<ruleSet id="coverage" createBean="com.ebao.gs.integration.core.mapping.ds.bean.PolicyCtSOABO">
-		<rule>
-			<acord-path>premium</acord-path>
-			<default-value>5555</default-value>
-			<bean-path>premium</bean-path>
-			<!-- class:com.ebao.gs.integration.mapping.tools.impl.CodeTableUtils?method=format -->
-			<tools>bean:codeTable?method=convert@codetable=T_AS@perCondition=id=5
-			</tools>
-		</rule>
-	</ruleSet>
+	
 
 
 </rules>

@@ -1,5 +1,7 @@
 package com.ebao.gs.integration.mapping.helper.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ public class ToolsProvider extends BeanHelper implements IToolsProiver {
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
 		Assert.notNull(tool, "call Tools ,parameter toolname is null");
-		return super.call(tool, value);
+		return super.run(tool, value);
 	}
 
 	public Method findMethod(Map<String, String> parametersMap,
@@ -24,5 +26,6 @@ public class ToolsProvider extends BeanHelper implements IToolsProiver {
 						Map.class });
 		return method;
 	}
+
 
 }

@@ -13,7 +13,7 @@ public class CodeTableUtils implements ITools {
 
 	// TODO implement
 	public Object convert(Object value, Map<String, String> parameterMap) {
-		return 123;
+		return "";
 	}
 
 }

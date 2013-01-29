@@ -1,5 +1,7 @@
 package com.ebao.gs.integration.mapping.helper;
 
+import java.io.IOException;
+
 public interface IToolsProiver {
 
 

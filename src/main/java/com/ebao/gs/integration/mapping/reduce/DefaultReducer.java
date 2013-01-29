@@ -27,6 +27,8 @@ import com.ebao.gs.integration.mapping.utils.ParameterUtils;
 
 public class DefaultReducer implements Reducer {
 
+	private static final String TRUE = "true";
+
 	private IDataFetcher dataFetcher;
 
 	private IBeanDataSetter beanSetter;
@@ -86,17 +88,21 @@ public class DefaultReducer implements Reducer {
 
 	private Object getSourceValue(Object value, Rule rule)
 			throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
+			ClassNotFoundException, IOException {
 		if (!this.haveSpecialRule(rule)
 				&& StringUtils.isBlank(rule.getDefaultValue())) {
 			return this.dataFetcher.getValue(value, rule.getAcordPath());
-		} else if (StringUtils.isNotBlank(rule.getDefaultValue())
-				&& StringUtils.isBlank(rule.getAcordPath())) {
+		} else if (this.haveDefaultValue(rule)) {
 			return rule.getDefaultValue();
 		} else {
 			return this.specialRuleProvider.call(rule.getSpecialRule(), value);
 		}
 
+	}
+
+	private boolean haveDefaultValue(Rule rule) {
+		return StringUtils.isNotBlank(rule.getDefaultValue())
+				&& StringUtils.isBlank(rule.getAcordPath());
 	}
 
 	private Object callRules(Object value, Map<String, Object> map,
@@ -115,24 +121,36 @@ public class DefaultReducer implements Reducer {
 					this.processListData(refPair, map, ruleSetRef, contextMap);
 					this.doAfter(map, targetBean, rule, ruleSetRef);
 				}
-
 			} else {
 				Object soureValue = this.getSourceValue(value, rule);
-				if (StringUtils.isNotBlank(rule.getTool())) {
+				if (this.haveTools(rule)) {
 					soureValue = this.callTools(rule.getTool(), soureValue);
 				}
 
 				beanSetter.setValue(context, rule.getBeanPath(), soureValue);
 			}
-
 		}
 
 		return targetBean;
 	}
 
+	private boolean haveTools(Rule rule) {
+		return StringUtils.isNotBlank(rule.getTool())
+				&& StringUtils.isBlank(rule.getBeanPath());
+	}
+
+	/**
+	 * process for after ref function
+	 * 
+	 * @param map
+	 * @param targetBean
+	 * @param rule
+	 * @param ruleSetRef
+	 */
 	private void doAfter(Map<String, Object> map, Object targetBean, Rule rule,
 			RuleSet ruleSetRef) {
 		if (StringUtils.isNotBlank(rule.getAfter())) {
+			// TODO move to spring
 			if (rule.getAfter().startsWith("native:addList")) {
 				Map<String, String> parameterMap = ParameterUtils
 						.getParameters(rule.getAfter());
@@ -161,7 +179,7 @@ public class DefaultReducer implements Reducer {
 
 	private Object callTools(String tool, Object soureValue)
 			throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
+			ClassNotFoundException, IOException {
 		return toolsProvider.call(tool, soureValue);
 	}
 
@@ -178,6 +196,7 @@ public class DefaultReducer implements Reducer {
 		return StringUtils.isNotEmpty(rule.getSpecialRule());
 	}
 
+	
 	private Object createBean(RuleSet ruleSet, Map<String, Object> contextMap)
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
@@ -197,7 +216,7 @@ public class DefaultReducer implements Reducer {
 	}
 
 	private boolean contextFlagIsTrue(String context) {
-		return StringUtils.isNotBlank(context) && "true".equals(context);
+		return StringUtils.isNotBlank(context) && TRUE.equals(context);
 	}
 
 	public void setDataFetcher(IDataFetcher dataFetcher) {
